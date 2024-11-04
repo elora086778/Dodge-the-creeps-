@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1bb31wyqnspl"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_irhvy"]
+[ext_resource type="Texture2D" uid="uid://by5raciksi5m6" path="res://art/enemyFlyingAlt_1.png" id="2_foq0n"]
+[ext_resource type="Texture2D" uid="uid://dthtm2aybpc0v" path="res://art/enemyFlyingAlt_2.png" id="3_2re2w"]
+[ext_resource type="Texture2D" uid="uid://d0f3doxp85axf" path="res://art/enemySwimming_1.png" id="4_3ku10"]
+[ext_resource type="Texture2D" uid="uid://ciyxwo2a3wsu6" path="res://art/enemySwimming_2.png" id="5_pxe2p"]
+[ext_resource type="Texture2D" uid="uid://d2by0gxporqxk" path="res://art/enemyWalking_1.png" id="6_pypqu"]
+[ext_resource type="Texture2D" uid="uid://hxeekj0olwmr" path="res://art/enemyWalking_2.png" id="7_2mcam"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ynnq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_foq0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2re2w")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3ku10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pxe2p")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_pypqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2mcam")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vsydm"]
+radius = 68.0
+height = 136.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_irhvy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_1ynnq")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vsydm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
